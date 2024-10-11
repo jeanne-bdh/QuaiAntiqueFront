@@ -22,9 +22,10 @@ function validateForm() {
     const nomOK = validateRequired(inputNom);
     const prenomOK = validateRequired(inputPrenom);
     const emailOK = validateEmail(inputEmail);
-    const passwordOK = validateEmail(inputPassword);
+    const passwordOK = validatePassword(inputPassword);
+    const passwordConfirmOK = validateConfirmPassword(inputPassword, inputValidatePassword);
 
-    if (nomOK && prenomOK && emailOK && passwordOK) {
+    if (nomOK && prenomOK && emailOK && passwordOK && passwordConfirmOK) {
         btnInscription.disabled = false;
     }
     else {
@@ -80,6 +81,21 @@ function validatePassword(input) {
     else {
         input.classList.add("is-invalid");
         input.classList.remove("is-valid");
+        return false;
+    }
+}
+
+// Fonction pour valider le champ Confirmation Password
+
+function validateConfirmPassword(inputPwd, inputConfirmPwd) {
+    if (inputPwd.value == inputConfirmPwd.value) {
+        inputConfirmPwd.classList.add("is-valid");
+        inputConfirmPwd.classList.remove("is-invalid");
+        return true;
+    }
+    else {
+        inputConfirmPwd.classList.add("is-invalid");
+        inputConfirmPwd.classList.remove("is-valid");
         return false;
     }
 }
